@@ -1,0 +1,13 @@
+<ion-view title="{{title}}">
+	<ion-content class="padding">
+		<ion-list>
+				<img src="{{githubProfile.avatar_url}}">
+				<div class="col">Username: {{ githubProfile.login }}</div>
+				<div class="col">Name: {{ githubProfile.name }}</div>
+				<div class="col">Blog: {{ githubProfile.blog }}</div>
+				<div class="col">Total repos: {{ githubProfile.public_repos}}</div>
+				<div class="col">Followers: {{ githubProfile.followers }}</div>
+				<div class="col">Following: {{ githubProfile.following }}</div>
+		</ion-list>
+	</ion-content>
+</ion-view>
