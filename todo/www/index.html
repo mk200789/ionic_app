@@ -27,7 +27,10 @@
                     <ion-content>
                          <ion-list>
                               <ion-item ng-repeat="task in tasks">
-                                   {{task.title}}
+                                   <div class="item-button-right">
+                                        {{task.title}}
+                                        <button class="button button-positive" ng-click="removeTask($index)">Remove</button>
+                                   </div>
                               </ion-item>
                          </ion-list>
                     </ion-content>

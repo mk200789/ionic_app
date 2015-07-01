@@ -19,6 +19,13 @@ angular.module('todo', ['ionic'])
           });
           $scope.taskModal.hide();
           task.title = "";
+          console.log($scope.tasks);
+     };
+
+     //remove task
+     $scope.removeTask = function(index){
+          $scope.tasks.splice(index, 1);
+
      };
 
      //open task modal 
