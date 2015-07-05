@@ -4,7 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var fb = new Firebase("https://vivid-heat-3718.firebaseio.com");
+angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -34,9 +35,20 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: "/user/myImages",
     views: {
       'menuContent': {
-        templateUrl: "templates/myimages.html"
+        templateUrl: "templates/myimages.html",
+        controller: "myImagesCtrl"
       }
     }
+  })
+
+  .state('app.test', {
+    url: "/user/test",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/test.html",
+        controller: "testCtrl"
+      }
+    },
   })
 
   .state('app.browse', {

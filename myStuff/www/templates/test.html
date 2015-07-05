@@ -1,0 +1,18 @@
+<ion-view view-title="Test Upload Image">
+    <ion-nav-buttons side="right">
+        <!--<button class="button button-clear button-positive" ng-click="add_img()">Add</button>-->
+        <button class="button button-icon icon ion-camera" ng-click="upload()"></button>
+    </ion-nav-buttons>
+    
+    <ion-content>
+        <h1>Test</h1>
+        <div class="row responsive-sm">
+            <!--<div class="row" ng-repeat="image in images">-->
+                <div class="col" ng-repeat="image in images">
+                    <img ng-src="data:image/jpeg;base64,{{images[$index].image}}" width="100%" />
+                </div>
+            
+        </div>
+    </ion-content>
+
+</ion-view>

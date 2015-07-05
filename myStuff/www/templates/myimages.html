@@ -1,4 +1,4 @@
-<ion-view view-title="Images">
+<ion-view view-title="My Pictures">
     <ion-nav-buttons side="right">
         <!--<button class="button button-clear button-positive" ng-click="add_img()">Add</button>-->
         <button class="button" ng-click="add_img()">Edit</button>
@@ -9,5 +9,29 @@
     </ion-content>
 
     <script id="add-new-image.html" type="text/ng-template">
+        <div class="modal">
+            <ion-header-bar class="bar-secondar">
+                <h1 class="title">Add New Image</h1>
+                <button class="button button-clear button-positive" ng-click="closeAddImg()">Cancel</button>
+            </ion-header-bar>
+            <ion-content>
+                <form ng-submit="addImg(img)">
+                    <div class="list">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Name" ng-model="img.name">
+                        </label>
+                        <label class="item item-input">
+                            <input type="text" placeholder="Description" ng-model="img.description">
+                        </label>
+                        <label class="item item-input">
+                            <button class="button button-energized" ng-click="add()">Add img</button>
+                        </label>
+                    </div>
+                    <div class="padding">
+                        <button type="submit" class="button button-block button-positive">Add</button>
+                    </div>
+                </form>
+            </ion-content>
+        </div>
     </script>
 </ion-view>

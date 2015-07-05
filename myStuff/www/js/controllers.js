@@ -52,7 +52,83 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('myImages', function($scope){
+.controller('myImagesCtrl', function($scope, $ionicModal, $ionicHistory, $firebaseArray, $cordovaCamera){
+  //create and load add image modal
+  $ionicModal.fromTemplateUrl('add-new-image.html', function(modal){
+      $scope.taskModal = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up'
+  });
+
+  //show modal
+  $scope.add_img = function(){
+    $scope.taskModal.show();
+  }
+
+  //remove modal
+  $scope.closeAddImg = function(){
+    $scope.taskModal.hide();
+  }
+
+
+})
+
+
+.controller('testCtrl', function($scope, $state, $ionicModal, $ionicHistory, $firebaseAuth, $firebaseArray, $cordovaCamera, $cordovaSocialSharing){
+
+  $ionicHistory.clearHistory();
+  $scope.images = [];
+
+  console.log(fb);
+
+  var fbouth = $firebaseAuth(fb);
+  fbouth.$authWithPassword({
+    email: 'cafe.mui@gmail.com',
+    password: 'nikolaikim'
+  }).catch(function(error){
+    console.error("ERROR: " + error);
+  });
+  
+  var fbAuth = fb.getAuth();
+  if (fbAuth){
+    console.log('auth');
+    var userReference = fb.child("users/"+fbAuth.uid);
+    var syncArray = $firebaseArray(userReference.child("images"));
+    $scope.images = syncArray
+  }
+  else{
+    console.log("no");
+    $state.go("app.test");
+  }
+
+  $scope.upload = function() {
+      var options = {
+          quality : 75,
+          destinationType : Camera.DestinationType.DATA_URL,
+          sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+          allowEdit : true,
+          encodingType: Camera.EncodingType.JPEG,
+          popoverOptions: CameraPopoverOptions,
+          targetWidth: 500,
+          targetHeight: 500,
+          saveToPhotoAlbum: false
+      };
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+          syncArray.$add({image: imageData}).then(function() {
+              alert("Image has been uploaded!");
+          });
+      }, function(error) {
+          console.error(error);
+      });
+  }
+
+
+
+  $scope.shareViaTwitter = function() {
+      $cordovaSocialSharing.shareViaTwitter("Check out this cool app I'm using called IonicProject for ");
+  }
+
 
 });
 
