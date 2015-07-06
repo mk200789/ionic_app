@@ -5,3 +5,5 @@ A group of mobile app projects built using Ionic for the purpose of learning Ion
   - A simple todo list where you can add/remove task.
 - [social-profile](https://github.com/mk200789/ionic_projects/tree/master/social-portfolio)
   - An app gathering data from your social profile.
+- [myStuff](https://github.com/mk200789/ionic_projects/tree/master/myStuff)
+  - An app posting/edit/share pictures
