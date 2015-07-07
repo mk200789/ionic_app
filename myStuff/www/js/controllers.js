@@ -79,13 +79,14 @@ angular.module('starter.controllers', [])
 
   $ionicHistory.clearHistory();
   $scope.images = [];
+  $scope.image = '';
 
   console.log(fb);
 
   var fbouth = $firebaseAuth(fb);
   fbouth.$authWithPassword({
-    email: 'cafe.mui@gmail.com',
-    password: 'nikolaikim'
+    email: 'yyyy',
+    password: 'xxxxx'
   }).catch(function(error){
     console.error("ERROR: " + error);
   });
@@ -102,6 +103,32 @@ angular.module('starter.controllers', [])
     $state.go("app.test");
   }
 
+  //create and load add image modal
+  $ionicModal.fromTemplateUrl('add-new-image.html', function(modal){
+      $scope.taskModal = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up'
+  });
+
+  //show modal
+  $scope.add_img = function(){
+    $scope.taskModal.show();
+  }
+
+  //remove modal
+  $scope.closeAddImg = function(){
+    $scope.taskModal.hide();
+  }
+
+  //add image with description and title
+  $scope.addImg = function(img){
+    syncArray.$add({name: img.name, description: img.description, image: $scope.image});
+    img.name, img.description, $scope.image = "", "","";
+    $scope.taskModal.hide();
+
+  }
+
   $scope.upload = function() {
       var options = {
           quality : 75,
@@ -115,6 +142,27 @@ angular.module('starter.controllers', [])
           saveToPhotoAlbum: false
       };
       $cordovaCamera.getPicture(options).then(function(imageData) {
+        $scope.image = imageData;
+      }, function(error) {
+        console.error(error);
+      });
+  }
+
+/**
+  $scope.upload = function() {
+      var options = {
+          quality : 75,
+          destinationType : Camera.DestinationType.DATA_URL,
+          sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+          allowEdit : true,
+          encodingType: Camera.EncodingType.JPEG,
+          popoverOptions: CameraPopoverOptions,
+          targetWidth: 500,
+          targetHeight: 500,
+          saveToPhotoAlbum: false
+      };
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+          $scope.image = imageData;
           syncArray.$add({image: imageData}).then(function() {
               alert("Image has been uploaded!");
           });
@@ -124,7 +172,6 @@ angular.module('starter.controllers', [])
   }
 
 
-  /**
   $scope.shareViaTwitter = function() {
       $cordovaSocialSharing.shareViaTwitter("Check out this cool app I'm using called IonicProject for ");
   }
