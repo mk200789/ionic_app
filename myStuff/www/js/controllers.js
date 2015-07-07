@@ -124,11 +124,11 @@ angular.module('starter.controllers', [])
   }
 
 
-
+  /**
   $scope.shareViaTwitter = function() {
       $cordovaSocialSharing.shareViaTwitter("Check out this cool app I'm using called IonicProject for ");
   }
-
+  **/
 
 });
 
